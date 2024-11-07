@@ -1,3 +1,5 @@
+import 'package:ganaderia/pages/login/login_widget.dart';
+
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -58,8 +60,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                   Align(
                     alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 48.0, 0.0, 24.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          0.0, 48.0, 0.0, 24.0),
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 1.036,
                         height: 62.0,
@@ -90,10 +92,12 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                   },
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                                  alignment:
+                                      const AlignmentDirectional(-1.0, 0.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 90.0, 0.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 90.0, 0.0),
                                     child: Text(
                                       'Perfil de Usuario',
                                       textAlign: TextAlign.center,
@@ -118,8 +122,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                   ),
                   Flexible(
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 30.0, 24.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          24.0, 30.0, 24.0, 0.0),
                       child: Material(
                         color: Colors.transparent,
                         elevation: 4.0,
@@ -187,8 +191,9 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 16.0, 16.0, 16.0),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 16.0, 16.0, 16.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -318,7 +323,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                             FlutterFlowIconButton(
                                               borderRadius: 20.0,
                                               buttonSize: 40.0,
-                                              fillColor: const Color(0xFF97CC75),
+                                              fillColor:
+                                                  const Color(0xFF97CC75),
                                               icon: const Icon(
                                                 Icons.edit,
                                                 color: Colors.black,
@@ -456,7 +462,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                             FlutterFlowIconButton(
                                               borderRadius: 20.0,
                                               buttonSize: 40.0,
-                                              fillColor: const Color(0xFF97CC75),
+                                              fillColor:
+                                                  const Color(0xFF97CC75),
                                               icon: const Icon(
                                                 Icons.edit,
                                                 color: Colors.black,
@@ -502,7 +509,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                                         ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color: Colors.black,
                                                         width: 1.0,
                                                       ),
@@ -512,7 +520,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                                     ),
                                                     focusedBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide:
+                                                          const BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -572,7 +581,8 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                                             FlutterFlowIconButton(
                                               borderRadius: 20.0,
                                               buttonSize: 40.0,
-                                              fillColor: const Color(0xFF97CC75),
+                                              fillColor:
+                                                  const Color(0xFF97CC75),
                                               icon: const Icon(
                                                 Icons.edit,
                                                 color: Colors.black,
@@ -596,20 +606,24 @@ class _PerfilWidgetState extends State<PerfilWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(
+                        24.0, 0.0, 24.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () {
-                        print('Button pressed ...');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginWidget()),
+                        );
                       },
                       text: 'Cerrar Sesión',
                       options: FFButtonOptions(
                         width: MediaQuery.sizeOf(context).width * 0.9,
                         height: 50.0,
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 0.0, 0.0),
+                        iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 0.0, 0.0, 0.0),
                         color: const Color(0xFF97CC75),
                         textStyle:
                             FlutterFlowTheme.of(context).titleMedium.override(

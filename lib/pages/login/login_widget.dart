@@ -1,9 +1,15 @@
+import 'package:ganaderia/pages/home_page/home_page_model.dart';
+import 'package:ganaderia/pages/home_page/home_page_widget.dart';
+import 'package:ganaderia/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
+
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'login_model.dart';
 export 'login_model.dart';
+import 'package:http/http.dart' as http;
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -51,7 +57,8 @@ class _LoginWidgetState extends State<LoginWidget> {
             ),
             decoration: const BoxDecoration(),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -232,8 +239,63 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     .asValidator(context),
                               ),
                               FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  final email = _model.textController1!.text;
+                                  final password = _model.textController2!.text;
+
+                                  try {
+                                    print(
+                                        'Enviando solicitud de inicio de sesión...'); // Depuración: Indicar que se ha enviado la solicitud
+                                    final response = await http.post(
+                                      Uri.parse(
+                                          'http://localhost:5290/api/Acceso/Login'),
+                                      headers: <String, String>{
+                                        'Content-Type':
+                                            'application/json; charset=UTF-8',
+                                      },
+                                      body: jsonEncode(<String, String>{
+                                        'email': email,
+                                        'contrasena': password,
+                                      }),
+                                    );
+
+                                    print(
+                                        'Respuesta de la API recibida: ${response.statusCode}'); // Depuración: Mostrar código de estado
+                                    if (response.statusCode == 200) {
+                                      final data = jsonDecode(response.body);
+                                      print(
+                                          'Datos recibidos: $data'); // Depuración: Mostrar los datos recibidos
+
+                                      if (data.containsKey('token')) {
+                                        String token = data['token'];
+                                        print(
+                                            'Token recibido: $token'); // Depuración: Verificar si el token está en los datos
+
+                                        Provider.of<AuthProvider>(context,
+                                                listen: false)
+                                            .setToken(token);
+                                        print(
+                                            'Token después de setear en AuthProvider: ${Provider.of<AuthProvider>(context, listen: false).token}');
+
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomePageWidget(),
+                                          ),
+                                        );
+                                      } else {
+                                        print(
+                                            'Error: No se encontró el token en la respuesta de la API'); // Depuración: Si no hay token
+                                      }
+                                    } else {
+                                      print(
+                                          'Error de autenticación: ${response.body}'); // Depuración: Mostrar mensaje de error si la autenticación falla
+                                    }
+                                  } catch (e) {
+                                    print(
+                                        'Error en el proceso de login: $e'); // Depuración: Manejo de excepción
+                                  }
                                 },
                                 text: 'Iniciar Sesión',
                                 options: FFButtonOptions(
@@ -241,8 +303,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                                   height: 50.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
+                                  iconPadding:
+                                      const EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 0.0),
                                   color: const Color(0xFF97CC75),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall

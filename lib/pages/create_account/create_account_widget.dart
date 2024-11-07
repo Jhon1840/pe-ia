@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'create_account_model.dart';
 export 'create_account_model.dart';
+import 'auth_service.dart';
 
 class CreateAccountWidget extends StatefulWidget {
+  
   const CreateAccountWidget({super.key});
 
   @override
@@ -15,7 +17,9 @@ class CreateAccountWidget extends StatefulWidget {
 }
 
 class _CreateAccountWidgetState extends State<CreateAccountWidget>
-    with TickerProviderStateMixin {
+  with TickerProviderStateMixin {
+  final AuthService _authService = AuthService('http://localhost:5290');
+  
   late CreateAccountModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -907,7 +911,23 @@ class _CreateAccountWidgetState extends State<CreateAccountWidget>
                                                     0.0, 0.0, 0.0, 16.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
-                                                context.pushNamed('HomePage');
+                                                final success = await _authService.register(
+                                                  nombre: _model.nombresTextController.text,
+                                                  apellido: _model.apellidosTextController.text,
+                                                  email: _model.correoElectronicoTextController.text,
+                                                  contrasena: _model.contrasenaTextController.text,
+                                                  telefono: _model.telefonoTextController.text,
+                                                  ciudad: _model.ciudadTextController.text,
+                                                  rolId: 1, 
+                                                );
+
+                                                if (success) {
+                                                  context.pushNamed('HomePage');
+                                                } else {
+                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                                    SnackBar(content: Text('Error al registrar la cuenta.')),
+                                                  );
+                                                }
                                               },
                                               text: 'Create Account',
                                               options: FFButtonOptions(

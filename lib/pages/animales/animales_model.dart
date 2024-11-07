@@ -1,3 +1,6 @@
+import 'package:ganaderia/providers/auth_provider.dart';
+import 'package:provider/provider.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 import '/w_i_d_t_g_e_t_s/nav_bar1/nav_bar1_widget.dart';
 import 'animales_widget.dart' show AnimalesWidget;
@@ -32,6 +35,11 @@ class AnimalesModel extends FlutterFlowModel<AnimalesWidget> {
   String? Function(BuildContext, String?)? textController6Validator;
   // Model for NavBar1 component.
   late NavBar1Model navBar1Model;
+
+
+  String? getToken(BuildContext context) {
+    return Provider.of<AuthProvider>(context, listen: false).token;
+  }
 
   @override
   void initState(BuildContext context) {
